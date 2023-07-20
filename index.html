@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NewsApi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">  
+  
+  </head>
+
+ <style>
+body{
+  background-image: url(https://img.freepik.com/free-vector/earth-blue-wave-background_1017-36678.jpg?w=1380&t=st=1674743989~exp=1674744589~hmac=e3314e2dba5fbf34759e4a6d421bec76dc70ef2de8879fac15c1452dcf5cc28c);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+</style>
+<header class=""navbar>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">NewsApp</a>
+      <h4 class="navbar-brand"><span id="news"></span> News</h4>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2"  id="inp" type="search" placeholder="Search" aria-label="Search">
+          <button  class="btn btn-outline-success" type="submit" id="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+<body><br>
+  <div class="container" id="data">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+     <script>
+        let topic=document.getElementById("inp").value;
+  const options = {
+    method: 'GET',
+    headers: {
+      'x-rapidapi-subscription': 'ultra',
+      'x-rapidapi-proxy-secret': 'c02cea90-4588-11eb-add9-c577b8ecdc8e',
+      'x-rapidapi-user': 'suprikurniyanto',
+      'X-RapidAPI-Key': '3b515ea7e1msh840264f67e6630fp14fef5jsnc9309cde212a',
+      'X-RapidAPI-Host': 'news-api14.p.rapidapi.com'
+    }
+  };
+
+  const get=(topic)=>{
+    
+   let data='https://news-api14.p.rapidapi.com/search?q='+topic+'&country=ind&language=en&pageSize=10&publisher=cnn.com%2Cbbc.com'
+    news.innerHTML=topic;
+fetch(data, options)
+  .then(response => response.json())
+  .then(response => {
+     console.log(response)
+    var d =response.articles[0].published_date;
+    var t =response.articles[0].published_date;
+    const datadiv = document.querySelector('#data')
+    const articles = response.articles;
+    articles.forEach(article => {
+      let artdiv = document.createElement('div')
+        artdiv.innerHTML = '<div align="center"><div class="card shadow-lg p-2 mb-5 bg-white rounded" style="width: 50rem;">\
+    <div class="card-body ">\
+    <a  id="url" href="'+article.url+'" ><h6 class="card-title"><span id ="title">'+article.title+'</h6></a>\
+    <label style="padding-left:0px">Date:</label>'+d.slice(0, 10)+' <br><label style="text-align-last:0px;">Time:</label>'+d.slice(11,16)+'\
+    <br><br><a  id="publisherurl" href='+article.publisher.url+' class="btn btn-primary">News by '+article.publisher.name+'</a>\
+  </div>\
+</div>\
+<br>' ;
+    datadiv.appendChild(artdiv)
+    });
+  })
+  .catch(err => console.error(err));
+  }
+
+submit.addEventListener("click",(e)=>{
+  document.getElementsByClassName("container").innerHTML = "";
+  get(inp.value)
+})
+ get("cinema");
+</script> 
+   
+</div>
+</body>
+</html>
+
