@@ -26,4 +26,4 @@ A simple news app that displays the latest headlines from various sources.
 
 
 ### Live-Preview
-[Click Here to View Live Preview](https://.netlify.app/)
+[Click Here to View Live Preview](https://ubnewsapp.netlify.app/)
